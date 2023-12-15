@@ -12,10 +12,14 @@ const SearchBarInput = styled.input`
   height: 100%;
   padding: 0 20px;
   font-size: 1rem;
-  border: 1px solid #d0cfce;
+  background-color: ${(props) => props.theme.tdBg};
+  /* border: 1px solid #d0cfce; */
   outline: none;
-  border-radius: 6px;
-
+  border-radius: 8px;
+  border: none;
+  box-shadow:
+    0px 4px 16px 0px rgba(101, 173, 225, 0.08),
+    0px 2px 5px 0px rgba(55, 55, 55, 0.15);
   &:focus {
     border: 1px solid #008abf;
     transition: 0.35s ease;

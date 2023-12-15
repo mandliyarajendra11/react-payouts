@@ -1,19 +1,42 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-const Pagination: React.FC = () => {
+const Pagination = ({ setPage }: any) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePagination = (pageNumber: number) => {
+    const newPage = currentPage + pageNumber;
+
+    // Check if the new page is within the valid range
+    if (newPage > 0) {
+      setCurrentPage(newPage);
+      setPage(newPage); // Assuming setPage is a function to update the page in your parent component
+    }
+  };
+
   return (
     <PageContainer className="page">
-      <PageBtn className="page__btn">&lt;</PageBtn>
-      <PageNumbers className="page__numbers">1</PageNumbers>
-      <PageNumbers className="page__numbers active">2</PageNumbers>
-      <PageNumbers className="page__numbers">3</PageNumbers>
-      <PageNumbers className="page__numbers">4</PageNumbers>
-      <PageNumbers className="page__numbers">5</PageNumbers>
-      <PageNumbers className="page__numbers">6</PageNumbers>
-      <PageDots className="page__dots">...</PageDots>
-      <PageNumbers className="page__numbers">10</PageNumbers>
-      <PageBtn className="page__btn">&gt;</PageBtn>
+      <PageBtn className="page__btn" onClick={() => handlePagination(-1)}>
+        &lt;
+      </PageBtn>
+
+      {/* Render a few page numbers (adjust the logic based on your actual requirements) */}
+      {[1, 2, 3, 4, 5, 6, "...", 10].map((page, index) => (
+        <PageNumbers
+          key={index}
+          className={`page__numbers ${currentPage === page ? "active" : ""}`}
+          onClick={() =>
+            typeof page === "number"
+              ? handlePagination(page - currentPage)
+              : null
+          }>
+          {page}
+        </PageNumbers>
+      ))}
+
+      <PageBtn className="page__btn" onClick={() => handlePagination(1)}>
+        &gt;
+      </PageBtn>
     </PageContainer>
   );
 };
@@ -27,7 +50,8 @@ const PageContainer = styled.div`
   align-items: center;
   margin-bottom: 1rem;
   border-radius: 0.6rem;
-  background: #ffffff;
+  color: ${(props) => props.theme.tdColor};
+
   box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
   .active {
     background-color: rgba(111, 118, 126, 0.4);
@@ -46,15 +70,7 @@ const PageNumbers = styled.div`
   cursor: pointer;
 `;
 
-const PageDots = styled(PageNumbers)`
-  width: 2.6rem;
-  height: 2.6rem;
-  cursor: initial;
-`;
-
 const PageBtn = styled(PageNumbers)`
-  pointer-events: none;
-
   &.active {
     pointer-events: initial;
 

@@ -3,9 +3,8 @@ import { createRoot } from "react-dom/client";
 import { App } from "./app";
 import { Provider } from "react-redux";
 import store from "./reducer/store";
-
-import { ThemeProvider } from "./component/stylecomponent/ThemeContext";
 import "./index.css";
+import { ThemeProvider } from "./component/stylecomponent/ThemeContext";
 
 const rootElement = document.querySelector('[data-js="root"]');
 
@@ -16,10 +15,10 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 root.render(
   <StrictMode>
-    <Provider store={store}>
-      <ThemeProvider>
+    <ThemeProvider>
+      <Provider store={store}>
         <App />
-      </ThemeProvider>
-    </Provider>
+      </Provider>
+    </ThemeProvider>
   </StrictMode>
 );

@@ -8,9 +8,9 @@ export const Payout = createApi({
   }),
   endpoints: (builder) => ({
     GetData: builder.query({
-      query: () => {
+      query: ({ page }) => {
         return {
-          url: `payouts`,
+          url: `payouts?page=${page}`,
           method: "GET",
         };
       },
