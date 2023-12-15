@@ -3,8 +3,8 @@ import Table from "@/component/Table";
 import { useGetDataQuery, useSearchDataQuery } from "@/reducer/Payouts";
 import { useState } from "react";
 import styled from "styled-components";
-import lightmode from "@/light-mode.png";
-import darkmode from "@/night-mode.png";
+import lightmode from "src/img/light-mode.png";
+import darkmode from "src/img/night-mode.png";
 import { useTheme } from "@/component/stylecomponent/ThemeContext";
 const Home = () => {
   const [username, setUsername] = useState("");
@@ -27,7 +27,7 @@ const Home = () => {
       <div className="main-heading">
         <h1>Payouts</h1>
         <img
-          style={mode ? { filter: "invert(1)" } : {}}
+          style={!mode ? { filter: "invert(1)" } : {}}
           src={mode ? lightmode : darkmode}
           onClick={() => {
             toggleTheme();
@@ -40,7 +40,7 @@ const Home = () => {
           <div></div>
           <span>Payout History</span>
         </h3>
-        <SearchBar setUsername={setUsername} />
+        <SearchBar mode={mode} setUsername={setUsername} />
       </div>
       <Table
         data={!username.length ? data?.data : filterData}
@@ -54,13 +54,15 @@ const Home = () => {
 export default Home;
 
 const Section = styled.div`
-  height: 100vh;
+  width: 100%;
   padding: 24px 50px;
+
   .main-heading {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     h1 {
       font-size: 40px;
       color: ${(props) => props.theme.heading};
@@ -87,6 +89,25 @@ const Section = styled.div`
         width: 16px;
         height: 32px;
         background-color: #999dff;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 10px 15px;
+    .main-heading {
+      h1 {
+        font-size: 28px;
+      }
+      img {
+        width: 30px;
+      }
+    }
+    .history {
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        gap: 8px;
       }
     }
   }

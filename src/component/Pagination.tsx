@@ -67,6 +67,9 @@ const PageNumbers = styled.div`
   align-items: center;
   margin: 0.8rem;
   font-size: 1.4rem;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
   cursor: pointer;
 `;
 

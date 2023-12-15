@@ -53,6 +53,7 @@ export const lightTheme = {
   thBg: "#FFF",
   heading: "black",
   subHeading: "black",
+  trBg: "#f5f5f5",
 };
 
 export const darkTheme = {
@@ -63,4 +64,5 @@ export const darkTheme = {
   thBg: "#75838D",
   heading: "#fff",
   subHeading: "#E0E0E0",
+  trBg: "rgba(244, 244, 244, 0.50)",
 };

@@ -4,6 +4,9 @@ import styled from "styled-components";
 const SearchContainer = styled.form`
   width: 490px;
   height: 45px;
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const SearchBarInput = styled.input`
@@ -12,6 +15,10 @@ const SearchBarInput = styled.input`
   height: 100%;
   padding: 0 20px;
   font-size: 1rem;
+  @media (max-width: 768px) {
+    padding: 0 10px;
+    font-size: 12px;
+  }
   background-color: ${(props) => props.theme.tdBg};
   /* border: 1px solid #d0cfce; */
   outline: none;
@@ -21,10 +28,8 @@ const SearchBarInput = styled.input`
     0px 4px 16px 0px rgba(101, 173, 225, 0.08),
     0px 2px 5px 0px rgba(55, 55, 55, 0.15);
   &:focus {
-    border: 1px solid #008abf;
     transition: 0.35s ease;
-    color: #008abf;
-
+    color: ${(props) => props.theme.tdColor};
     &::placeholder {
       transition: opacity 0.45s ease;
       opacity: 0;
@@ -38,9 +43,14 @@ const SearchIcon = styled.img`
   height: 75px;
   top: -60px;
   right: -10px;
+  @media (max-width: 768px) {
+    width: 28%;
+    height: 100%;
+    top: -100%;
+  }
 `;
 
-const SearchForm = ({ setUsername }: any) => {
+const SearchForm = ({ setUsername, mode }: any) => {
   const handleInputChange = debounce((value: string) => {
     setUsername(value.toLowerCase());
   }, 800); // Adjust the debounce delay as needed
@@ -54,7 +64,10 @@ const SearchForm = ({ setUsername }: any) => {
         }
         placeholder="Search by username"
       />
-      <SearchIcon src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" />
+      <SearchIcon
+        src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
+        style={!mode ? { filter: "invert(1)" } : {}}
+      />
     </SearchContainer>
   );
 };
